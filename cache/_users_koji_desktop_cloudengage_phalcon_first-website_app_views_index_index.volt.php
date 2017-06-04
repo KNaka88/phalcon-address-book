@@ -6,7 +6,7 @@
 <?php
     echo $this->tag->form(
         [
-            "address/create",
+            "users/search",
             "autocomplete" => "off",
             "class" => "form-horizontal"
         ]
@@ -24,13 +24,6 @@
     <label for="lastName" class="col-sm-2 control-label">Last Name</label>
     <div class="col-sm-10">
         <?php echo $this->tag->textField(["lastName", "class" => "form-control", "id" => "lastName", "placeholder" => "Last Name"]) ?>
-    </div>
-</div>
-
-<div class="form-group">
-    <label for="email" class="col-sm-2 control-label">Email</label>
-    <div class="col-sm-10">
-        <?php echo $this->tag->textField(["email", "type" => "email", "class" => "form-control", "id" => "email", "placeholder" => "email"]) ?>
     </div>
 </div>
 
