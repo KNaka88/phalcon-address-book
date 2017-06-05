@@ -168,5 +168,37 @@ class IndexController extends ControllerBase
         ]);
     }
 
+    public function deleteAction($id)
+    {
+        $user = Users::findFirstByid($id);
+        if(!$user) {
+            $this->flash->error("user was not found");
 
+            $this->dispatcher->forward([
+                'controller' => 'index',
+                'action' => 'index'
+            ]);
+            return;
+        }
+
+        if(!$user->delete()) {
+            foreach ($user->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => 'index',
+                'action' => 'index'
+            ]);
+
+            return;
+        }
+
+        $this->flash->success("user was deleted successfully");
+
+        $this->dispatcher->forward([
+            'controller' => 'index',
+            'action' => 'index'
+        ]);
+    }
 }
