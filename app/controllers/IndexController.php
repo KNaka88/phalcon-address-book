@@ -9,7 +9,6 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
-      $this->persistent->parameters = null;
     }
 
     public function newAction()
@@ -95,4 +94,79 @@ class IndexController extends ControllerBase
 
           $this->view->page = $paginator->getPaginate();
     }
+
+    public function editAction($id) {
+        $user = Users::findFirstByid($id);
+
+        if(!$this->request->isPost()){
+            if(!$user) {
+              $this->flash->error("user was not found");
+
+              $this->dispatcher->forward([
+                  'controller' => 'index',
+                  'action' => 'index'
+              ]);
+
+              return;
+            }
+        }
+
+        $this->view->id = $user->id;
+        $this->tag->setDefault("id", $user->id);
+        $this->tag->setDefault("firstname", $user->firstname);
+        $this->tag->setDefault("lastname", $user->lastname);
+        $this->tag->setDefault("email", $user->email);
+        $this->tag->setDefault("contactnumber", $user->contactnumber);
+    }
+
+    public function updateAction()
+    {
+        if(!$this->request->isPost()) {
+          $this->dispatcher->forward([
+              'controller' => 'index',
+              'action' => 'index'
+          ]);
+          return;
+        }
+
+        $id = $this->request->getPost("id");
+        $user = Users::findFirstByid($id);
+
+        if(!$user) {
+            $this->flash->error("user does not exist" . $id);
+
+            $this->dispatcher->forward([
+                'controller' => 'index',
+                'action' => 'index'
+            ]);
+            return;
+        }
+
+        $user->firstname = $this->request->getPost("firstname");
+        $user->lastname = $this->request->getPost("lastname");
+        $user->email = $this->request->getPost("email");
+        $user->contactnumber = $this->request->getPost("contactnumber");
+
+        if(!$user->save()) {
+            foreach ($user->getMessages() as $message) {
+                $this->flash->error($message);
+            }
+
+            $this->dispatcher->forward([
+                'controller' => 'index',
+                'action' => 'edit',
+                'params' => [$user->id]
+            ]);
+            return;
+        }
+
+        $this->flash->success("user was updated successfully");
+
+        $this->dispatcher->forward([
+          'controller' => 'index',
+          'action' => 'index'
+        ]);
+    }
+
+
 }

@@ -6,6 +6,8 @@
  //This declaration is necessary for showing search results
 ?>
 
+
+
 <div class="page-header">
     <h1 class="center">Address Book</h1>
 </div>
@@ -32,7 +34,7 @@
 <div class="collapse" id="createContact">
   <div>
     <h2>Register Contact Info</h2>
-    <?= $this->tag->form(['index/save']) ?>
+    <?= $this->tag->form(['index/update']) ?>
     <fieldset>
       <div class="form-group">
           <label for="firstname" class="col-sm-2 control-label">First Name</label>

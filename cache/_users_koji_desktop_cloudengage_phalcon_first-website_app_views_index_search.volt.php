@@ -22,6 +22,8 @@
                 <th>Last Name</th>
                 <th>Email</th>
                 <th>Contact Number</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +34,8 @@
                     <td><?php echo $user->lastname ?></td>
                     <td><?php echo $user->email ?></td>
                     <td><?php echo $user->contactnumber ?></td>
+                    <td><?php echo $this->tag->linkTo(["index/edit/" . $user->id, "Edit"]); ?></td>
+                    <td><?php echo $this->tag->linkTo(["users/delete/" . $user->id, "Delete"]); ?></td>
                 </tr>
               <?php endforeach; ?>
         </tbody>
