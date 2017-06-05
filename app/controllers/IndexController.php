@@ -30,10 +30,12 @@ class IndexController extends ControllerBase
         }
 
         $user = new Users();
-        $user->firstname = $this->request->getPost("firstName");
-        $user->lastname = $this->request->getPost("lastName");
+        $user->firstname = $this->request->getPost("firstname");
+        $user->lastname = $this->request->getPost("lastname");
         $user->email = $this->request->getPost("email");
         $user->contactnumber = $this->request->getPost("contactnumber");
+
+        echo $this->firstname;
 
         if(!$user->save()) {
           //Case failed to save
@@ -57,4 +59,40 @@ class IndexController extends ControllerBase
         ]);
     }
 
+
+    public function searchAction()
+    {
+          $numberPage = 1;
+          if ($this->request->isPost()){
+              $query = Criteria::fromInput($this->di, 'Users', $_POST);
+              $this->persistent->parameters = $query->getParams();
+          } else {
+              $numberPage = $this->request->getQuery("page", "int");
+          }
+
+          $parameters = $this->persistent->parameters;
+          if (!is_array($parameters)) {
+              $parameters = [];
+          }
+          $parameters["older"] = "id";
+
+          $users = Users::find($parameters);
+          if(count($users) == 0) {
+              $this->flash->notice("no results");
+
+              $this->dispatcher->forward([
+                  "controller" => "index",
+                  "action" => "index"
+              ]);
+              return;
+          }
+
+          $paginator = new Paginator([
+              'data' => $users,
+              'limit' => 10,
+              'page' => $numberPage
+          ]);
+
+          $this->view->page = $paginator->getPaginate();
+    }
 }

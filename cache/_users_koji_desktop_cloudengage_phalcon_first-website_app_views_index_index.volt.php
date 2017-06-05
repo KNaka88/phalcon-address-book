@@ -1,7 +1,14 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
+
+ //This declaration is necessary for showing search results
+?>
+
 <div class="page-header">
     <h1 class="center">Address Book</h1>
 </div>
-045d6c5613b1440bb7263e5e5c247df5
 
 <?php echo $this->getContent() ?>
 
@@ -25,50 +32,43 @@
 <div class="collapse" id="createContact">
   <div>
     <h2>Register Contact Info</h2>
-    <?php
-        echo $this->tag->form(
-            [
-                "index/save",
-                "autocomplete" => "off",
-                "class" => "form-horizontal"
-            ]
-        );
-    ?>
+    <?= $this->tag->form(['index/save']) ?>
+    <fieldset>
+      <div class="form-group">
+          <label for="firstname" class="col-sm-2 control-label">First Name</label>
+          <div class="col-sm-10">
+            <?= $this->tag->textField(['firstname', 'class' => 'form-control', 'placeholder' => 'First Name']) ?>
+          </div>
+      </div>
 
-    <div class="form-group">
-        <label for="firstName" class="col-sm-2 control-label">First Name</label>
-        <div class="col-sm-10">
-            <?php echo $this->tag->textField(["firstName", "class" => "form-control", "id" => "firstName", "placeholder" => "First Name"]) ?>
-        </div>
-    </div>
+      <div class="form-group">
+          <label for="lastname" class="col-sm-2 control-label">Last Name</label>
+          <div class="col-sm-10">
+            <?= $this->tag->textField(['lastname', 'class' => 'form-control', 'placeholder' => 'Last Name']) ?>
+          </div>
+      </div>
 
-    <div class="form-group">
-        <label for="lastName" class="col-sm-2 control-label">Last Name</label>
-        <div class="col-sm-10">
-            <?php echo $this->tag->textField(["lastName", "class" => "form-control", "id" => "lastName", "placeholder" => "Last Name"]) ?>
-        </div>
-    </div>
+      <div class="form-group">
+          <label for="email" class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+            <?= $this->tag->emailField(['email', 'class' => 'form-control', 'placeholder' => 'Email']) ?>
+          </div>
+      </div>
 
-    <div class="form-group">
-        <label for="email" class="col-sm-2 control-label">Email</label>
-        <div class="col-sm-10">
-            <?php echo $this->tag->textField(["email", "type" => "email", "class" => "form-control", "id" => "email", "placeholder" => "email"]) ?>
-        </div>
-    </div>
+      <div class="form-group">
+          <label for="contactnumber" class="col-sm-2 control-label">Contact Number</label>
+          <div class="col-sm-10">
+            <?= $this->tag->textField(['contactnumber', 'class' => 'form-control', 'placeholder' => 'Phone#']) ?>
+          </div>
+      </div>
 
-    <div class="form-group">
-        <label for="contactNumber" class="col-sm-2 control-label">Contact Number</label>
-        <div class="col-sm-10">
-            <?php echo $this->tag->textField(["contactnumber", "type" => "number", "class" => "form-control", "id" => "contactnumber", "placeholder" => "Contact Number"]) ?>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <?php echo $this->tag->submitButton(["Submit", "class" => "btn btn-default"]) ?>
-        </div>
-    </div>
-    <?php echo $this->tag->endForm(); ?>
+      <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <?= $this->tag->submitButton(['submit', 'class' => 'btn btn-success']) ?>
+          </div>
+      </div>
+    </fieldset>
+  <?= $this->tag->endform() ?>
   </div>
 </div>
 

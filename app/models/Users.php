@@ -48,22 +48,7 @@ class Users extends \Phalcon\Mvc\Model
      *
      * @return boolean
      */
-    public function validation()
-    {
-        $validator = new Validation();
 
-        $validator->add(
-            'email',
-            new EmailValidator(
-                [
-                    'model'   => $this,
-                    'message' => 'Please enter a correct email address',
-                ]
-            )
-        );
-
-        return $this->validate($validator);
-    }
 
     /**
      * Initialize method for model.
