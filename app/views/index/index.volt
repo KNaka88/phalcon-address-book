@@ -34,7 +34,7 @@
 <div class="collapse" id="createContact">
   <div>
     <h2>Register Contact Info</h2>
-    {{ form("index/update") }}
+    {{ form("index/save") }}
     <fieldset>
       <div class="form-group">
           <label for="firstname" class="col-sm-2 control-label">First Name</label>

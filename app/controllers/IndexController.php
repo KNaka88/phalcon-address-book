@@ -88,7 +88,7 @@ class IndexController extends ControllerBase
 
           $paginator = new Paginator([
               'data' => $users,
-              'limit' => 10,
+              'limit' => 5,
               'page' => $numberPage
           ]);
 

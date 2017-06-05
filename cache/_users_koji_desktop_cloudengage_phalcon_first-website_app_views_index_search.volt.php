@@ -51,3 +51,14 @@
   <div class="col-sm-11">
   </div>
 </div>
+<div class="col-sm-11">
+  <nav>
+    <ul class="pagination">
+        <li><?php echo $this->tag->linkTo("index/search", "First") ?></li>
+        <li><?php echo $this->tag->linkTo("index/search?page=" . $page->before, "Previous") ?></li>
+        <li><?php echo $this->tag->linkTo("index/search?page=" . $page->next, "Next") ?></li>
+        <li><?php echo $this->tag->linkTo("index/search?page=" . $page->last, "Last") ?></li>
+    </ul>
+  </nav>
+
+</div>
