@@ -34,45 +34,44 @@
 <div class="collapse" id="createContact">
   <div>
     <h2>Register Contact Info</h2>
-    {{ form("index/save") }}
+    <?= $this->tag->form(['index/save']) ?>
     <fieldset>
-      {#{{ form.render('firstname') }}
-      {{ form.messages('firstname') }}#}
+      
       <div class="form-group">
           <label for="firstname" class="col-sm-2 control-label">First Name</label>
           <div class="col-sm-10">
-            {{text_field("firstname", "class": "form-control", "placeholder": "First Name")}}
+            <?= $this->tag->textField(['firstname', 'class' => 'form-control', 'placeholder' => 'First Name']) ?>
           </div>
       </div>
 
       <div class="form-group">
           <label for="lastname" class="col-sm-2 control-label">Last Name</label>
           <div class="col-sm-10">
-            {{text_field("lastname", "class": "form-control", "placeholder": "Last Name")}}
+            <?= $this->tag->textField(['lastname', 'class' => 'form-control', 'placeholder' => 'Last Name']) ?>
           </div>
       </div>
 
       <div class="form-group">
           <label for="email" class="col-sm-2 control-label">Email</label>
           <div class="col-sm-10">
-            {{email_field("email", "class": "form-control", "placeholder": "Email")}}
+            <?= $this->tag->emailField(['email', 'class' => 'form-control', 'placeholder' => 'Email']) ?>
           </div>
       </div>
 
       <div class="form-group">
           <label for="contactnumber" class="col-sm-2 control-label">Contact Number</label>
           <div class="col-sm-10">
-            {{text_field("contactnumber", "class": "form-control", "placeholder": "Phone#")}}
+            <?= $this->tag->textField(['contactnumber', 'class' => 'form-control', 'placeholder' => 'Phone#']) ?>
           </div>
       </div>
 
       <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            {{submit_button("submit", "class": "btn btn-success")}}
+            <?= $this->tag->submitButton(['submit', 'class' => 'btn btn-success']) ?>
           </div>
       </div>
     </fieldset>
-  {{ endForm() }}
+  <?= $this->tag->endform() ?>
   </div>
 </div>
 
