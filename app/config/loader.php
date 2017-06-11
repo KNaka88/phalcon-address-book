@@ -11,3 +11,15 @@ $loader = new \Phalcon\Loader();
      'Address\Forms'       => $config->application->formsDir,
      'Address'             => $config->application->libraryDir
  ])->register();
+
+
+//Don't forget to add this code to service.php
+
+/**
+ * Dispatcher use a default namespace
+ */
+// $di->set('dispatcher', function () {
+//     $dispatcher = new Dispatcher();
+//     $dispatcher->setDefaultNamespace('Address\Controllers');
+//     return $dispatcher;
+// });

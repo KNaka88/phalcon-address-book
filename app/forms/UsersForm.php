@@ -1,9 +1,9 @@
 <?php
 namespace Address\Forms;
+
 use Phalcon\Forms\Form;
 use Phalcon\Forms\Element\Text;
 use Phalcon\Forms\Element\Hidden;
-use Phalcon\Forms\Element\Select;
 use Phalcon\Forms\Element\Password;
 use Phalcon\Forms\Element\Submit;
 use Phalcon\Validation\Validator\Numericality;
@@ -17,47 +17,46 @@ class UsersForm extends Form
 {
     public function initialize($entity = null, $options = null)
     {
-
-        // In edition the id is hidden
-        if (isset($options['edit']) && $options['edit']) {
-            $id = new Hidden('id');
-        } else {
-            $id = new Text('id');
-        }
-
         // First Name
-        $this->add($id);
-
-        $name = new Text('firstname', [
-            'placeholder' => 'First Name'
+        $firstName = new Text('firstName', [
+            'placeholder' => 'First Name',
+            'class' => 'mdl-textfield__input'
         ]);
 
-        $name->addValidators([
+        $firstName->setLabel('First Name');
+
+        $firstName->addValidators([
             new PresenceOf([
-                'message' => 'The name is required'
+                'message' => 'The First Name is required'
             ])
         ]);
 
-        $this->add($name);
+        $this->add($firstName);
 
 
         // Last Name
-        $name = new Text('lastname', [
-            'placeholder' => 'Last Name'
+        $lastName = new Text('lastName', [
+            'placeholder' => 'Last Name',
+            'class' => 'mdl-textfield__input'
         ]);
 
-        $name->addValidators([
+        $lastName->setLabel('Last Name');
+
+        $lastName->addValidators([
             new PresenceOf([
-                'message' => 'The name is required'
+                'message' => 'The Last Name is required'
             ])
         ]);
 
-        $this->add($name);
+        $this->add($lastName);
 
         // Email
         $email = new Text('email', [
-            'placeholder' => 'Email'
+            'placeholder' => 'Email',
+            'class' => 'mdl-textfield__input'
         ]);
+
+        $email->setLabel('Email');
 
         $email->addValidators([
             new PresenceOf([
@@ -73,9 +72,13 @@ class UsersForm extends Form
 
 
         // Contact Number
-        $contactNumber = new Text('contactnumber', [
-            'placeholder' => 'Contact Number'
+        $contactNumber = new Text('contactNumber', [
+            'placeholder' => 'Contact Number',
+            'class' => 'mdl-textfield__input'
         ]);
+
+        $contactNumber->setLabel('Contact Number');
+
 
         $contactNumber->addValidators([
             new PresenceOf([
@@ -94,7 +97,9 @@ class UsersForm extends Form
 
 
         // Password
-        $password = new Password('password');
+        $password = new Password('password', [
+          'class' => 'mdl-textfield__input'
+        ]);
 
         $password->setLabel('Password');
 
@@ -116,7 +121,9 @@ class UsersForm extends Form
 
 
         // Confirm Password
-        $confirmPassword = new Password('confirmPassword');
+        $confirmPassword = new Password('confirmPassword', [
+          'class' => 'mdl-textfield__input'
+        ]);
 
         $confirmPassword->setLabel('Confirm Password');
 
@@ -146,5 +153,18 @@ class UsersForm extends Form
             'class' => 'mdl-button'
         ]));
 
+    }
+
+
+    /**
+     * Prints messages for a specific element
+     */
+    public function messages($name)
+    {
+        if ($this->hasMessagesFor($name)) {
+            foreach ($this->getMessagesFor($name) as $message) {
+                $this->flash->error($message);
+            }
+        }
     }
 }

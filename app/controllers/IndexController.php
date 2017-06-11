@@ -1,5 +1,7 @@
 <?php
 namespace Address\Controllers;
+
+use Address\Forms\UsersForm;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 
@@ -9,6 +11,8 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
+        $form = new UsersForm();
+        $this->view->form = $form;
     }
 
     public function newAction()
