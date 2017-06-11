@@ -5,10 +5,9 @@ $loader = new \Phalcon\Loader();
 /**
  * We're a registering a set of directories taken from the configuration file
  */
- $loader->registerDirs(
-     [
-         $config->application->controllersDir,
-         $config->application->modelsDir,
-         $config->application->formsDir,
-     ]
- )->register();
+ $loader->registerNamespaces([
+     'Address\Models'      => $config->application->modelsDir,
+     'Address\Controllers' => $config->application->controllersDir,
+     'Address\Forms'       => $config->application->formsDir,
+     'Address'             => $config->application->libraryDir
+ ])->register();

@@ -1,4 +1,5 @@
 <?php
+namespace Address\Models;
 //
 // use Phalcon\Validation;
 // use Phalcon\Mvc\Model\Validator\Email as EmailValidator;

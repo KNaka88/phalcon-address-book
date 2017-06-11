@@ -2,6 +2,7 @@
 
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
+use Phalcon\Mvc\Dispatcher;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
@@ -100,6 +101,16 @@ $di->set('flash', function () {
         'warning' => 'alert alert-warning'
     ]);
 });
+
+/**
+ * Dispatcher use a default namespace
+ */
+$di->set('dispatcher', function () {
+    $dispatcher = new Dispatcher();
+    $dispatcher->setDefaultNamespace('Address\Controllers');
+    return $dispatcher;
+});
+
 
 /**
  * Start the session the first time some component request the session service
