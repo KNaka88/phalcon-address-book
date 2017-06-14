@@ -2,6 +2,7 @@
 namespace Address\Controllers;
 
 use Address\Forms\UsersForm;
+use Address\Forms\SearchForm;
 use Address\Models\Users;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
