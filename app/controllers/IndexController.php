@@ -2,6 +2,7 @@
 namespace Address\Controllers;
 
 use Address\Forms\UsersForm;
+use Address\Models\Users;
 use Phalcon\Mvc\Model\Criteria;
 use Phalcon\Paginator\Adapter\Model as Paginator;
 
@@ -22,6 +23,8 @@ class IndexController extends ControllerBase
 
     public function saveAction()
     {
+        $form = new UsersForm(null);
+
         if(!$this->request->isPost()){
           // forward the execution flow to another controller/action
             $this->dispatcher->forward([
@@ -32,34 +35,42 @@ class IndexController extends ControllerBase
             // https://docs.phalconphp.com/en/3.0.2/reference/dispatching.html#forwarding-to-other-actions
         }
 
-        $user = new Users();
-        $user->firstname = $this->request->getPost("firstname");
-        $user->lastname = $this->request->getPost("lastname");
-        $user->email = $this->request->getPost("email");
-        $user->contactnumber = $this->request->getPost("contactnumber");
-
-        echo $this->firstname;
-
-        if(!$user->save()) {
-          //Case failed to save
-            foreach ($user->getMessages() as $message) {
-                $this->flash->error($message);
+        // Check input is valid form
+        if($form->isValid($this->request->getPost()) == false) {
+            //If there was invalid input, show error
+            foreach ($form->getMessages() as $message) {
+              $this->flash->error($message);
             }
+        } else {
+            // Save to database
+            $user = new Users();
+            $user->firstName = $this->request->getPost("firstName");
+            $user->lastName = $this->request->getPost("lastName");
+            $user->email = $this->request->getPost("email");
+            $user->contactNumber = $this->request->getPost("contactNumber");
+            $user->password = $this->request->getPost("password");
+
+            if(!$user->save()) {
+              //Case failed to save
+                foreach ($user->getMessages() as $message) {
+                    $this->flash->error($message);
+                }
+
+                $this->dispatcher->forward([
+                    'controller' => 'index',
+                    'action' =>'index'
+                ]);
+                return;
+            }
+
+            $this->flash->success("address was created successfully");
 
             $this->dispatcher->forward([
                 'controller' => 'index',
-                'action' =>'index'
+                'action' => 'index'
             ]);
 
-            return;
         }
-
-        $this->flash->success("address was created successfully");
-
-        $this->dispatcher->forward([
-            'controller' => 'index',
-            'action' => 'index'
-        ]);
     }
 
 

@@ -85,8 +85,8 @@ class UsersForm extends Form
                 'message' => 'Contact Number is required'
             ]),
             new StringLength([
-                'min' => 11,
-                'max' => 11,
+                'min' => 10,
+                'max' => 10,
             ]),
             new Numericality([
                 "message" => ":field is not numeric",
