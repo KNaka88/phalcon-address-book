@@ -1,4 +1,10 @@
+<?php
+/**
+ * @var \Phalcon\Mvc\View\Engine\Php $this
+ */
 
+ //This declaration is necessary for showing search results
+?>
 
 
 <?= $this->getContent() ?>
@@ -6,10 +12,6 @@
 <div class="page-header">
     <h1 class="center">Address Book!!</h1>
 </div>
-
-
-
-
 
 
 <!-- CREATE CONTACT BUTTON -->
@@ -34,47 +36,47 @@
     <?= $this->tag->form(['index/save']) ?>
       <fieldset>
         <div class="mdl-textfield mdl-js-textfield">
-          <?= $form->label('firstName', ['class' => 'mdl-textfield__label']) ?>
-          <?= $form->render('firstName') ?>
-          <?= $form->messages('firstName') ?>
+            <?= $usersForm->label('firstName', ['class' => 'mdl-textfield__label']) ?>
+            <?= $usersForm->render('firstName') ?>
+            <?= $usersForm->messages('firstName') ?>
         </div>
 
         <div class="mdl-textfield mdl-js-textfield">
-          <?= $form->label('lastName', ['class' => 'mdl-textfield__label']) ?>
-          <?= $form->render('lastName') ?>
-          <?= $form->messages('lastName') ?>
+            <?= $usersForm->label('lastName', ['class' => 'mdl-textfield__label']) ?>
+            <?= $usersForm->render('lastName') ?>
+            <?= $usersForm->messages('lastName') ?>
         </div>
 
         <div class="mdl-textfield mdl-js-textfield">
-          <?= $form->label('email', ['class' => 'mdl-textfield__label']) ?>
-          <?= $form->render('email') ?>
-          <?= $form->messages('email') ?>
+            <?= $usersForm->label('email', ['class' => 'mdl-textfield__label']) ?>
+            <?= $usersForm->render('email') ?>
+            <?= $usersForm->messages('email') ?>
         </div>
 
         <div class="mdl-textfield mdl-js-textfield">
-        <?= $form->label('contactNumber', ['class' => 'mdl-textfield__label']) ?>
-        <?= $form->render('contactNumber') ?>
-        <?= $form->messages('contactNumber') ?>
+            <?= $usersForm->label('contactNumber', ['class' => 'mdl-textfield__label']) ?>
+            <?= $usersForm->render('contactNumber') ?>
+            <?= $usersForm->messages('contactNumber') ?>
         </div>
 
         <div class="mdl-textfield mdl-js-textfield">
-        <?= $form->label('password', ['class' => 'mdl-textfield__label']) ?>
-        <?= $form->render('password') ?>
-        <?= $form->messages('password') ?>
+            <?= $usersForm->label('password', ['class' => 'mdl-textfield__label']) ?>
+            <?= $usersForm->render('password') ?>
+            <?= $usersForm->messages('password') ?>
         </div>
 
         <div class="mdl-textfield mdl-js-textfield">
-        <?= $form->label('confirmPassword', ['class' => 'mdl-textfield__label']) ?>
-        <?= $form->render('confirmPassword') ?>
-        <?= $form->messages('confirmPassword') ?>
+            <?= $usersForm->label('confirmPassword', ['class' => 'mdl-textfield__label']) ?>
+            <?= $usersForm->render('confirmPassword') ?>
+            <?= $usersForm->messages('confirmPassword') ?>
         </div>
 
         <div>
-          <?= $form->render('Sign Up') ?>
+            <?= $usersForm->render('Sign Up') ?>
         </div>
         <div>
-          <?= $form->render('csrf', ['value' => $this->security->getToken()]) ?>
-          <?= $form->messages('csrf') ?>
+            <?= $usersForm->render('csrf', ['value' => $this->security->getToken()]) ?>
+            <?= $usersForm->messages('csrf') ?>
         </div>
       </fieldset>
     <?= $this->tag->endform() ?>
@@ -88,35 +90,35 @@
   <div>
     <h2>Search Contact</h2>
     <?= $this->tag->form(['index/search']) ?>
-      <fieldset>
-        <div class="mdl-textfield mdl-js-textfield">
-          <?= $form->label('firstName', ['class' => 'mdl-textfield__label']) ?>
-          <?= $form->render('firstName') ?>
-          <?= $form->messages('firstName') ?>
-        </div>
+        <fieldset>
+            <div class="mdl-textfield mdl-js-textfield">
+                <?= $searchForm->label('firstName', ['class' => 'mdl-textfield__label']) ?>
+                <?= $searchForm->render('firstName') ?>
+                <?= $searchForm->messages('firstName') ?>
+            </div>
 
-        <div class="mdl-textfield mdl-js-textfield">
-          <?= $form->label('lastName', ['class' => 'mdl-textfield__label']) ?>
-          <?= $form->render('lastName') ?>
-          <?= $form->messages('lastName') ?>
-        </div>
+            <div class="mdl-textfield mdl-js-textfield">
+                <?= $searchForm->label('lastName', ['class' => 'mdl-textfield__label']) ?>
+                <?= $searchForm->render('lastName') ?>
+                <?= $searchForm->messages('lastName') ?>
+            </div>
 
-        <div class="mdl-textfield mdl-js-textfield">
-          <?= $form->label('email', ['class' => 'mdl-textfield__label']) ?>
-          <?= $form->render('email') ?>
-          <?= $form->messages('email') ?>
-        </div>
+            <div class="mdl-textfield mdl-js-textfield">
+                <?= $searchForm->label('email', ['class' => 'mdl-textfield__label']) ?>
+                <?= $searchForm->render('email') ?>
+                <?= $searchForm->messages('email') ?>
+            </div>
 
-        <div class="mdl-textfield mdl-js-textfield">
-          <?= $form->label('contactNumber', ['class' => 'mdl-textfield__label']) ?>
-          <?= $form->render('contactNumber') ?>
-          <?= $form->messages('contactNumber') ?>
-        </div>
+            <div class="mdl-textfield mdl-js-textfield">
+                <?= $searchForm->label('contactNumber', ['class' => 'mdl-textfield__label']) ?>
+                <?= $searchForm->render('contactNumber') ?>
+                <?= $searchForm->messages('contactNumber') ?>
+            </div>
 
-        <div>
-          <?= $form->render('Search') ?>
-        </div>
-      </fieldset>
+            <div>
+            <?= $searchForm->render('Search') ?>
+            </div>
+        </fieldset>
     <?= $this->tag->endform() ?>
   </div>
 </div>

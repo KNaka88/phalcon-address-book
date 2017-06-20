@@ -3,11 +3,10 @@ namespace Address\Forms;
 
 use Phalcon\Forms\Form;
 use Phalcon\Forms\Element\Text;
-use Phalcon\Forms\Element\Hidden;
 use Phalcon\Forms\Element\Submit;
-use Phalcon\Validation\Validator\Numerciality;
+use Phalcon\Validation\Validator\Numericality;
 use Phalcon\Validation\Validator\Email;
-use Phalcon\Validation\Validator\Confirmation;
+use Phalcon\Validation\Validator\StringLength;
 
 class SearchForm extends Form
 {
@@ -77,6 +76,7 @@ class SearchForm extends Form
         $this->add(new Submit('Search', [
             'class' => 'mdl-button'
         ]));
+
   }
 
   /**

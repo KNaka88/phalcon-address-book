@@ -13,8 +13,9 @@ class IndexController extends ControllerBase
 
     public function indexAction()
     {
-        $form = new UsersForm();
-        $this->view->form = $form;
+        $this->view->setTemplateBefore('public');
+        $this->view->usersForm = new UsersForm;
+        $this->view->searchForm = new SearchForm;
     }
 
     public function newAction()
@@ -48,9 +49,9 @@ class IndexController extends ControllerBase
             $user->firstName = $this->request->getPost("firstName");
             $user->lastName = $this->request->getPost("lastName");
             $user->email = $this->request->getPost("email");
-            $user->contactNumber = $this->request->getPost("contactNumber");
+            $user->contactNumber = intval($this->request->getPost("contactNumber"));
             $user->password = $this->request->getPost("password");
-
+            echo $user->contactNumber;
             if(!$user->save()) {
               //Case failed to save
                 foreach ($user->getMessages() as $message) {
@@ -74,41 +75,41 @@ class IndexController extends ControllerBase
         }
     }
 
-
     public function searchAction()
     {
-          $numberPage = 1;
-          if ($this->request->isPost()){
-              $query = Criteria::fromInput($this->di, 'Users', $_POST);
-              $this->persistent->parameters = $query->getParams();
-          } else {
-              $numberPage = $this->request->getQuery("page", "int");
-          }
+        $form = new SearchForm(null);
+        $numberPage = 1;
+        if ($this->request->isPost()){
+            $query = Criteria::fromInput($this->di, 'Address\Models\Users', $this->request->getPost());
+            $this->persistent->parameters = $query->getParams();
+        } else {
+            $numberPage = $this->request->getQuery("page", "int");
+        }
 
-          $parameters = $this->persistent->parameters;
-          if (!is_array($parameters)) {
-              $parameters = [];
-          }
-          $parameters["older"] = "id";
 
-          $users = Users::find($parameters);
-          if(count($users) == 0) {
-              $this->flash->notice("no results");
+        $parameters = $this->persistent->parameters;
+        if (!is_array($parameters)) {
+            $parameters = [];
+        }
+        $users = Users::find($parameters);
 
-              $this->dispatcher->forward([
-                  "controller" => "index",
-                  "action" => "index"
-              ]);
-              return;
-          }
+        if(count($users) == 0) {
+            $this->flash->notice("no results");
 
-          $paginator = new Paginator([
-              'data' => $users,
-              'limit' => 5,
-              'page' => $numberPage
-          ]);
+            $this->dispatcher->forward([
+                "controller" => "index",
+                "action" => "index"
+            ]);
+            return;
+        }
 
-          $this->view->page = $paginator->getPaginate();
+        $paginator = new Paginator([
+            'data' => $users,
+            'limit' => 5,
+            'page' => $numberPage
+        ]);
+
+        $this->view->page = $paginator->getPaginate();
     }
 
     public function editAction($id) {
