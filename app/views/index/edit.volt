@@ -21,16 +21,16 @@
  ?>
 
  <div class="form-group">
-    <label for="firstname" class="col-sm-2">First Name</label>
+    <label for="firstName" class="col-sm-2">First Name</label>
     <div class="col-sm-10">
-        {{ text_field("firstname", "class": "form-control", "size": 30) }}
+        {{ text_field("firstName", "class": "form-control", "size": 30) }}
     </div>
  </div>
 
  <div class="form-group">
-    <label for="lastname" class="col-sm-2">Last Name</label>
+    <label for="lastName" class="col-sm-2">Last Name</label>
     <div class="col-sm-10">
-        {{ text_field("lastname", "class": "form-control", "size": 30) }}
+        {{ text_field("lastName", "class": "form-control", "size": 30) }}
     </div>
  </div>
 
@@ -42,9 +42,9 @@
  </div>
 
  <div class="form-group">
-    <label for="contactnumber" class="col-sm-2">Contact Number</label>
+    <label for="contactNumber" class="col-sm-2">Contact Number</label>
     <div class="col-sm-10">
-        {{ text_field("contactnumber", "class": "form-control") }}
+        {{ text_field("contactNumber", "class": "form-control") }}
     </div>
  </div>
 

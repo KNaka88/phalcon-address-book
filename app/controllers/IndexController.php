@@ -130,10 +130,10 @@ class IndexController extends ControllerBase
 
         $this->view->id = $user->id;
         $this->tag->setDefault("id", $user->id);
-        $this->tag->setDefault("firstname", $user->firstname);
-        $this->tag->setDefault("lastname", $user->lastname);
+        $this->tag->setDefault("firstName", $user->firstName);
+        $this->tag->setDefault("lastName", $user->lastName);
         $this->tag->setDefault("email", $user->email);
-        $this->tag->setDefault("contactnumber", $user->contactnumber);
+        $this->tag->setDefault("contactNumber", $user->contactNumber);
     }
 
     public function updateAction()
@@ -159,10 +159,10 @@ class IndexController extends ControllerBase
             return;
         }
 
-        $user->firstname = $this->request->getPost("firstname");
-        $user->lastname = $this->request->getPost("lastname");
+        $user->firstName = $this->request->getPost("firstName");
+        $user->lastName = $this->request->getPost("lastName");
         $user->email = $this->request->getPost("email");
-        $user->contactnumber = $this->request->getPost("contactnumber");
+        $user->contactNumber = $this->request->getPost("contactNumber");
 
         if(!$user->save()) {
             foreach ($user->getMessages() as $message) {
