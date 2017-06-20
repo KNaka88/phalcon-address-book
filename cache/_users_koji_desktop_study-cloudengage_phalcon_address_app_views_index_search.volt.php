@@ -30,10 +30,10 @@
             <?php foreach ($page->items as $user): ?>
                 <tr>
                     <td><?php echo $user->id ?></td>
-                    <td><?php echo $user->firstname ?></td>
-                    <td><?php echo $user->lastname ?></td>
+                    <td><?php echo $user->firstName ?></td>
+                    <td><?php echo $user->lastName ?></td>
                     <td><?php echo $user->email ?></td>
-                    <td><?php echo $user->contactnumber ?></td>
+                    <td><?php echo $user->contactNumber ?></td>
                     <td><?php echo $this->tag->linkTo(["index/edit/" . $user->id, "Edit"]); ?></td>
                     <td><?php echo $this->tag->linkTo(["index/delete/" . $user->id, "Delete"]); ?></td>
                 </tr>
