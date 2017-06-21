@@ -50,8 +50,7 @@ class IndexController extends ControllerBase
             $user->lastName = $this->request->getPost("lastName");
             $user->email = $this->request->getPost("email");
             $user->contactNumber = intval($this->request->getPost("contactNumber"));
-            $user->password = $this->request->getPost("password");
-            echo $user->contactNumber;
+            $user->password = $this->security->hash($this->request->getPost("password"));
             if(!$user->save()) {
               //Case failed to save
                 foreach ($user->getMessages() as $message) {

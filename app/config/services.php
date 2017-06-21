@@ -1,5 +1,6 @@
 <?php
 
+use Phalcon\Crypt;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
 use Phalcon\Mvc\Dispatcher;
@@ -82,6 +83,17 @@ $di->setShared('db', function () {
     return $connection;
 });
 
+
+/**
+ * Crypt service
+ */
+$di->set('crypt', function () {
+    $config = $this->getConfig();
+
+    $crypt = new Crypt();
+    $crypt->setKey($config->application->cryptSalt);
+    return $crypt;
+});
 
 /**
  * If the configuration specify the use of metadata adapter use it or use memory otherwise
