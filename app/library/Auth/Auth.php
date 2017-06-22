@@ -3,6 +3,7 @@ namespace Address\Auth;
 use Phalcon\Mvc\User\Component;
 use Address\Models\Users;
 use Address\Models\SuccessLogins;
+use Address\Models\RememberTokens;
 
 class Auth extends Component
 {
@@ -33,6 +34,11 @@ class Auth extends Component
 
          // Register the successful login
          $this->saveSuccessLogin($user);
+
+         // if user checked 'remember me', run this function
+         if (isset($credentials['remember'])) {
+             $this->createRememberEnvironment($user);
+         }
      }
 
      /**
@@ -53,4 +59,18 @@ class Auth extends Component
         }
         echo "if no error happend, true!";
     }
+
+    /**
+     * Creates the remember me environment settings the related cookies and generating tokens
+     *
+     * @param \Address\Models\Users $user
+     */
+     public function createRememberEnvironment(Users $user)
+     {
+        $userAgent = $this->request->getUserAgent();
+        $token = md5($user->email . $user->password . $userAgent);
+
+     }
+
+
 }
