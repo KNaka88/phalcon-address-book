@@ -56,12 +56,14 @@ class SessionController extends ControllerBase
                     //     // it will always be computing a hash.
                     //     $this->security->hash(rand());
                     // }
-                    // // The validation has failed
+                    // // The validation has failed                    
                     return $this->response->redirect('users');
                 }
             }
         } catch (AuthException $e) {
             $this->flash->error($e->getMessage());
         }
+
+        $this->view->form = $form;
     }
 }
