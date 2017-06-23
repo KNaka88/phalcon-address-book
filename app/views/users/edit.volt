@@ -13,7 +13,7 @@
 <?php
     echo $this->tag->form(
         [
-            "index/update",
+            "users/update",
             "autocomplete" => "off",
             "class" => "form-horizontal"
         ]

@@ -35,6 +35,7 @@ class SessionController extends ControllerBase
                         $this->flash->error($message);
                     }
                 } else {
+                    // if user already logged in and has auth,
                     $this->auth->check([
                         'email' => $this->request->getPost('email'),
                         'password' => $this->request->getPost('password'),
@@ -56,6 +57,7 @@ class SessionController extends ControllerBase
                     //     $this->security->hash(rand());
                     // }
                     // // The validation has failed
+                    return $this->response->redirect('users');
                 }
             }
         } catch (AuthException $e) {

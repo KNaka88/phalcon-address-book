@@ -34,8 +34,8 @@
                     <td><?php echo $user->lastName ?></td>
                     <td><?php echo $user->email ?></td>
                     <td><?php echo $user->contactNumber ?></td>
-                    <td><?php echo $this->tag->linkTo(["index/edit/" . $user->id, "Edit"]); ?></td>
-                    <td><?php echo $this->tag->linkTo(["index/delete/" . $user->id, "Delete"]); ?></td>
+                    <td><?php echo $this->tag->linkTo(["users/edit/" . $user->id, "Edit"]); ?></td>
+                    <td><?php echo $this->tag->linkTo(["users/delete/" . $user->id, "Delete"]); ?></td>
                 </tr>
               <?php endforeach; ?>
         </tbody>
@@ -54,10 +54,10 @@
 <div class="col-sm-11">
   <nav>
     <ul class="pagination">
-        <li><?php echo $this->tag->linkTo("index/search", "First") ?></li>
-        <li><?php echo $this->tag->linkTo("index/search?page=" . $page->before, "Previous") ?></li>
-        <li><?php echo $this->tag->linkTo("index/search?page=" . $page->next, "Next") ?></li>
-        <li><?php echo $this->tag->linkTo("index/search?page=" . $page->last, "Last") ?></li>
+        <li><?php echo $this->tag->linkTo("users/search", "First") ?></li>
+        <li><?php echo $this->tag->linkTo("users/search?page=" . $page->before, "Previous") ?></li>
+        <li><?php echo $this->tag->linkTo("users/search?page=" . $page->next, "Next") ?></li>
+        <li><?php echo $this->tag->linkTo("users/search?page=" . $page->last, "Last") ?></li>
     </ul>
   </nav>
 

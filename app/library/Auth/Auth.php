@@ -32,13 +32,20 @@ class Auth extends Component
             throw new Exception('Wrong email/password combination');
          }
 
-         // Register the successful login
-         $this->saveSuccessLogin($user);
+        // Register the successful login
+        $this->saveSuccessLogin($user);
 
-         // if user checked 'remember me', run this function
-         if (isset($credentials['remember'])) {
-             $this->createRememberEnvironment($user);
-         }
+        // if user checked 'remember me', run this function
+        if (isset($credentials['remember'])) {
+            $this->createRememberEnvironment($user);
+        }
+
+        // set auth-identity for session
+        $this->session->set('auth-identity', [
+            'id' => $user->id,
+            'name' => $user->name,
+            'profile' => $user->profile->name
+        ]);
      }
 
      /**
@@ -57,7 +64,6 @@ class Auth extends Component
             $messages = $successLogin->getMessages();
             throw new Exception($messages[0]);
         }
-        echo "if no error happend, true!";
     }
 
     /**
@@ -135,6 +141,7 @@ class Auth extends Component
             }
         }
 
+        // When user was not found, navigate to login page again
         $this->cookies->get('RMU')->delete();
         $this->cookies->get('RMT')->delete();
 
