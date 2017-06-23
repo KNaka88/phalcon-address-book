@@ -7,7 +7,7 @@ use Phalcon\Mvc\Model;
  * RememberTokens
  * Stores the remember me tokens
  */
- class RememberTokens extends Models
+ class RememberTokens extends Model
  {
     /**
     *

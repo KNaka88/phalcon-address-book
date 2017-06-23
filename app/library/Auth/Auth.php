@@ -69,8 +69,77 @@ class Auth extends Component
      {
         $userAgent = $this->request->getUserAgent();
         $token = md5($user->email . $user->password . $userAgent);
-
+        $remember = new RememberTokens();
+        $remember->usersId = $user->id;
+        $remember->token = $token;
+        $remember->userAgent = $userAgent;
+        if ($remember->save()) {
+            $expire = time()  + 86400 * 8;
+            $this->cookies->set('RMU', $user->id, $expire);
+            $this->cookies->set('RMT', $token, $expire);
+        }
      }
+
+
+     /**
+      * Check if the session has a remember me cookie
+      *
+      * @return boolean
+      */
+     public function hasRememberMe()
+     {
+         return $this->cookies->has('RMU');
+     }
+
+
+    /**
+    * Logs on using the information in the cookies
+    *
+    * @return \Phalcon\Http\Response
+    */
+
+    public function loginWithRememberMe()
+    {
+        $userId = $this->cookies->get('RMU')->getValue();
+        $cookieToken = $this->cookies->get('RMT')->getValue();
+
+        $user = Users::findFirstById($userId);
+        if($user) {
+            $userAgent = $this->request->getUserAgent();
+            $token = md5($user->email . $user->password . $userAgent);
+
+            if($cookieToken == $token) {
+                $remember = RememberTokens::findFirst([
+                    'userId = ?0 AND token = ?1',
+                    'bind' => [
+                        $user->id,
+                        $token
+                    ]
+                ]);
+                if($remember) {
+
+                    if((time() - (86400 * 8)) < $remember->createdAt) {
+
+                        $this->checkUserFlags($user);
+
+                        $this->session->set('auth-identity', [
+                            'id' => $user->id,
+                            'name' => $user->name,
+                            'profile' => $user->profile->name
+                        ]);
+
+                        $this->saveSuccessLogin($user);
+                        return $this->response->redirect('users');
+                    }
+                }
+            }
+        }
+
+        $this->cookies->get('RMU')->delete();
+        $this->cookies->get('RMT')->delete();
+
+        return $this->response->redirect('session/login');
+    }
 
 
 }
