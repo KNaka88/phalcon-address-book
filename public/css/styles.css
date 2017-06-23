@@ -6,3 +6,16 @@
   line-height: 1.42857;
   padding: 6px 12px;
 }
+
+
+/*** views/layouts/public ***/
+
+.footer {
+    text-align: center;
+    height: 100px;
+    background-color: #f2f2f2;
+}
+
+.copy-right {
+    margin-top: 40px;
+}

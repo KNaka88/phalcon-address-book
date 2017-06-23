@@ -31,6 +31,8 @@
   {{ content() }}
 </div>
 
-<footer class="footer">
-© {{ date("Y") }} Koji Nakagawa
+<footer class="footer navbar-default navbar-fixed-bottom">
+  <div class="container-fluid copy-right">
+      <span>© {{ date("Y") }} Koji Nakagawa</span>
+  </div>
 </footer>
