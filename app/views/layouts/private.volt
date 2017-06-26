@@ -27,14 +27,6 @@
   </main>
 </div>#}
 
-<div>
-    {%- if not(logged_in is empty)%}
-        <p>{{ link_to('session/logout', 'Logout') }}</p>
-    {% else %}
-        <p>{{ link_to('session/index', 'Login') }}</p>
-    {% endif %}
-</div>
-
 <div class="container main-container">
   {{ content() }}
 </div>

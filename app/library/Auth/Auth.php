@@ -28,7 +28,10 @@ class Auth extends Component
 
          // Check the password
          if (!$this->security->checkHash($credentials['password'], $user->password)) {
-            // $this->registerUserThrotting($user->id);
+            // To protect against timing attacks. Regardless of whether a user
+            // exists or not, the script will take roughly the same amount as
+            // it will always be computing a hash.
+            $this->security->hash(rand());
             throw new Exception('Wrong email/password combination');
          }
 
@@ -147,6 +150,30 @@ class Auth extends Component
 
         return $this->response->redirect('session/login');
     }
+
+    /**
+    * Returns the current identity
+    *
+    * @return array
+    */
+    public function getIdentity()
+    {
+        return $this->session->get('auth-identity');
+    }
+
+    public function remove()
+    {
+        if ($this->cookies->has('RMU')) {
+            $this->cookies->get('RMU')->delete();
+        }
+        if ($this->cookies->has('RMT')) {
+            $this->cookies->get('RMT')->delete();
+        }
+
+        $this->session->remove('auth-identity');
+    }
+
+
 
 
 }

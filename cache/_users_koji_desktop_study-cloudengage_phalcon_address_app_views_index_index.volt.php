@@ -2,9 +2,9 @@
 
 <div class="page-header">
     <h1 class="center">Address Book!!</h1>
-</div>
-
-<?= $this->tag->linkTo(['session', 'Login']) ?>
+</div><?php if (!(empty($logged_in))) { ?>
+    <?= $this->tag->linkTo(['session', 'Login']) ?>
+<?php } ?>
 <!-- CREATE CONTACT BUTTON -->
 <p>
   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#createContact" aria-expanded="false" aria-controls="createContact">

@@ -4,7 +4,9 @@
     <h1 class="center">Address Book!!</h1>
 </div>
 
-{{ link_to("session", "Login") }}
+{%- if not(logged_in is empty) %}
+    {{ link_to("session", "Login") }}
+{% endif %}
 <!-- CREATE CONTACT BUTTON -->
 <p>
   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#createContact" aria-expanded="false" aria-controls="createContact">

@@ -1,12 +1,5 @@
 
 
-<div><?php if (!(empty($logged_in))) { ?>
-        <p><?= $this->tag->linkTo(['session/logout', 'Logout']) ?></p>
-    <?php } else { ?>
-        <p><?= $this->tag->linkTo(['session/index', 'Login']) ?></p>
-    <?php } ?>
-</div>
-
 <div class="container main-container">
   <?= $this->getContent() ?>
 </div>

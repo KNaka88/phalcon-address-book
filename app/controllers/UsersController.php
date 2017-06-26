@@ -9,11 +9,13 @@ use Phalcon\Paginator\Adapter\Model as Paginator;
 
 class UsersController extends ControllerBase
 {
+    public function initialize()
+    {
+        $this->view->setTemplateBefore('private');
+    }
 
     public function indexAction()
     {
-        $this->flash->success("login success");
-        $this->view->setTemplateBefore('public');
         $this->view->searchForm = new SearchForm;
     }
 

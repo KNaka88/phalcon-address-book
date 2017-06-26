@@ -5,7 +5,7 @@ use Phalcon\Mvc\User\Component;
 use Phalcon\Acl\Adapter\Memory as AclMemory;
 use Phalcon\Acl\Role as AclRole;
 use Phalcon\Acl\Resource as AclResource;
-// use Address\Models\Profiles;
+use Address\Models\Profiles;
 
 /**
 * Address\Acl\Acl
