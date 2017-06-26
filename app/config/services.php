@@ -10,6 +10,7 @@ use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
 use Phalcon\Flash\Direct as Flash;
 use Address\Auth\Auth;
+use Address\Acl\Acl;
 
 /**
  * Shared configuration service
@@ -133,6 +134,15 @@ $di->setShared('session', function () {
     $session->start();
 
     return $session;
+});
+
+/** Access Control List **/
+
+$di->set('acl', function () {
+    $acl = new Acl();
+    // $pr = $this->getShared('AclResources')->privateResources->toArray();
+    // $acl->addPrivateResources($pr);
+    return $acl;
 });
 
 /**

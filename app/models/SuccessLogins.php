@@ -34,8 +34,13 @@ class SuccessLogins extends Model
 
     public function initialize()
     {
-        $this->belongsTo('usersId', __NAMESPACE__ . '\Users', 'id', [
-            'alias' => 'user'
-        ]);
+        $this->belongsTo(
+            'usersId',
+            __NAMESPACE__ . '\Users',
+            'id',
+            [
+                'alias' => 'user'
+            ]
+        );
     }
 }

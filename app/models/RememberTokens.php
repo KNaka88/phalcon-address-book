@@ -50,6 +50,13 @@ use Phalcon\Mvc\Model;
 
     public function initialize()
     {
-        $this->belongsTo('usersId', _NAMESPACE_ . '\Users', 'id', ['alias' => 'user']);
+        $this->belongsTo(
+            'usersId',
+             _NAMESPACE_ . '\Users',
+             'id',
+             [
+                 'alias' => 'user'
+             ]
+         );
     }
  }

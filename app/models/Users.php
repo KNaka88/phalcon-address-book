@@ -72,14 +72,6 @@ class Users extends \Phalcon\Mvc\Model
     // }
 
     /**
-     * Initialize method for model.
-     */
-    public function initialize()
-    {
-        $this->setSchema("address_book");
-    }
-
-    /**
      * Returns table name mapped in the model.
      *
      * @return string
@@ -109,6 +101,43 @@ class Users extends \Phalcon\Mvc\Model
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
+    }
+
+    public function initialize()
+    {
+        $this->belongsTo(
+            'profilesId',
+            __NAMESPACE__ . '\Profiles',
+            'id',
+            [
+                'alias' => 'profile',
+                'reusable' => true
+            ]
+        );
+
+        $this->hasMany(
+            'id',
+            __NAMESPACE__ . '\SuccessLogins',
+            'usersId',
+            [
+                'alias' => 'successLogins',
+                'foreignKey' => [
+                    'message' => 'User cannot be deleted because he/she has activity in the system'
+                ]
+            ]
+        );
+
+        $this->hasMany(
+            'id',
+            __NAMESPACE__ . '\PasswordChanges',
+            'usersId',
+            [
+                'alias' => 'passwordChanges',
+                'foreignKey' => [
+                    'message' => 'User cannot be deleted because he/she has activity in the system'
+                ]
+            ]
+        );
     }
 
 }

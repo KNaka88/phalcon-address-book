@@ -1,6 +1,6 @@
 <?= $this->getContent() ?>
 
-<h2>Login</h2>
+<h2 class="center">Login</h2>
 <?= $this->tag->form(['session/login']) ?>
     <?= $loginForm->render('email') ?>
     <?= $loginForm->render('password') ?>
