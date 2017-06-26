@@ -233,6 +233,8 @@ class Acl extends Component
     *
     */
     public function addPrivateResources(array $resources) {
+        // var_dump($resources);
+        // exit;
         if (count($resources) > 0) {
             $this->privateResources = array_merge($this->privateResources, $resources);
             if (is_object($this->acl)) {

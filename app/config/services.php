@@ -136,10 +136,22 @@ $di->setShared('session', function () {
     return $session;
 });
 
-/** Access Control List **/
 
+/**
+* Setup the private resources (access control list)
+*/
+$di->setShared('AclResources', function() {
+    $pr = [];
+    if (is_readable(APP_PATH . '/config/privateResources.php')) {
+        $pr = include APP_PATH . '/config/privateResources.php';
+    }
+    return $pr;
+});
+
+/** Access Control List **/
 $di->set('acl', function () {
     $acl = new Acl();
+    // get acl resources and set controll area to acl
     // $pr = $this->getShared('AclResources')->privateResources->toArray();
     // $acl->addPrivateResources($pr);
     return $acl;
